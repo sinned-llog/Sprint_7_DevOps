@@ -49,6 +49,23 @@ def parse_basic_auth(auth_header: Optional[str]) -> Optional[tuple]:
             return None
         username, password = credentials.split(':', 1)
         return username, password
+    except ValueError:
+        return None
+    
+def authenticate_user(auth_header: Optional[str], require_admin: bool = False):
+    """Authenticates the user based on the Basic Authentication header. If require_admin is True, also checks if the user is an admin.
+    """
+    credentials = parse_basic_auth(auth_header)
+    if not credentials:
+        raise HTTPException(status_code=401, detail="Authentication header missing or invalid")
+    username, password = credentials
+    expected = user_db.get(username)
+    if expected is None or expected != password:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    if require_admin and (username != "admin" or password != user_db["admin"]):
+        raise HTTPException(status_code=403, detail="Admin privileges required")
+    return username
+    
 #get question
 #get health
 #put question, admin
