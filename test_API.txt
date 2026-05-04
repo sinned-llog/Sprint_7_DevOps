@@ -1,1 +1,29 @@
-curl -X GET -i http://127.0.0.1:8000
+###########################
+#test health of API
+###########################
+curl -X GET -i http://127.0.0.1:8000^
+
+#################################
+#get 10 questions for alice
+#################################
+curl -X GET -i "http://127.0.0.1:8000/questions?n=10&use=Positioning%20test&subject=Databases&subject=Docker"\
+-H "Authorization: Basic alice:wonderland"
+
+#####################################
+#add 1 question as admin
+#####################################
+curl -X POST "http://127.0.0.1:8000/questions" \
+     -H "Authorization: Basic admin:4dm1N" \
+     -H "Content-Type: application/json" \
+     -d '{
+        "id": 101,
+        "question": "What is DevOps?",
+        "subject": "DevOps",
+        "use": "Positioning test",
+        "correct": "B",
+        "responseA": "A programming language",
+        "responseB": "An approach for managing complexity in IT projects",
+        "responseC": "A database model",
+        "responseD": "An open source project",
+        "remark": "DevOps considers development and operations together"
+     }'
