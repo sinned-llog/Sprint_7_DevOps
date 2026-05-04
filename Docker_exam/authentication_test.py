@@ -18,9 +18,9 @@ def authentication_test(api_address, api_port, username, password):
     )
     output = '''
 
-    ============================
+    =============================
     Authentication test
-    ============================
+    =============================
     request done at "/permissions"
     | username="{username}"
     | password="{password}"
