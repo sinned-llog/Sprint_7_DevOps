@@ -1,0 +1,34 @@
+
+
+    =============================
+    Authentication test
+    =============================
+    request done at "/permissions"
+    | username="{username}"
+    | password="{password}"
+        expected result = 200
+    actual result = {status_code}
+    ==>  {test_status}
+    
+
+    =============================
+    Authentication test
+    =============================
+    request done at "/permissions"
+    | username="{username}"
+    | password="{password}"
+        expected result = 200
+    actual result = {status_code}
+    ==>  {test_status}
+    
+
+    =============================
+    Authentication test
+    =============================
+    request done at "/permissions"
+    | username="{username}"
+    | password="{password}"
+        expected result = 200
+    actual result = {status_code}
+    ==>  {test_status}
+    

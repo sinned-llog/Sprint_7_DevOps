@@ -2,9 +2,8 @@ import os
 import requests
 
 # definition of the API address
-api_address = '127.0.0.1'
-# API port
-api_port = 8000
+api_address = os.environ.get('API_ADDRESS', 'api')
+api_port = os.environ.get('API_PORT', '8000')
 
 # reqest
 def authentication_test(api_address, api_port, username, password):
@@ -50,7 +49,7 @@ for user in users:
     result = authentication_test(api_address, api_port, user['username'], user['password'])
     # printing in a file
     if os.environ.get('LOG') == '1':
-        with open('api_test.log', 'a') as file:
+        with open('logs/api_test.log', 'a') as file:
             file.write(result)
 
 
