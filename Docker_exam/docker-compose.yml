@@ -10,7 +10,7 @@ services:
   authentication_test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.authentication
     image: authentication_test_container:latest
     container_name: authentication_test
     environment:
@@ -20,14 +20,14 @@ services:
     networks:
       - my_network
     volumes:
-      - ./Docker_exam/logs:/logs
+      - ./logs:/logs
     depends_on:
       - api
 
   authorization_test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.authorization
     image: authorization_test_container:latest
     container_name: authorization_test
     environment:
@@ -37,7 +37,7 @@ services:
     networks:
       - my_network
     volumes:
-      - ./Docker_exam/logs:/logs
+      - ./logs:/logs
     depends_on:
       - api
       - authentication_test
@@ -45,7 +45,7 @@ services:
   content_test:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.content
     image: content_test_container:latest
     container_name: content_test
     environment:
@@ -55,7 +55,7 @@ services:
     networks:
       - my_network
     volumes:
-      - ./Docker_exam/logs:/logs
+      - ./logs:/logs
     depends_on:
       - api
       - authentication_test

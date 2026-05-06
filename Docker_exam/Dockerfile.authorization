@@ -1,0 +1,12 @@
+# image for authorization test
+FROM python:3.11-slim
+
+RUN pip install requests
+
+COPY authorization_test.py /authorization_test/authorization_test.py
+
+WORKDIR /authorization_test/
+
+CMD ["python", "authorization_test.py"]
+
+LABEL test_type="authorization"

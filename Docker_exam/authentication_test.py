@@ -36,8 +36,20 @@ def authentication_test(api_address, api_port, username, password):
     else:
         test_status = 'FAILURE'
 
-    print(output.format(username=username, password=password, status_code=status_code, test_status=test_status))
-    return output
+    print(output.format(
+        username=username, 
+        password=password, 
+        status_code=status_code, 
+        test_status=test_status
+        ))
+    
+    formatted_output = output.format(
+        username=username, 
+        password=password, 
+        status_code=status_code, 
+        test_status=test_status
+        )
+    return formatted_output
 
 users = [
     {'username': 'alice', 'password': 'wonderland'},
@@ -49,7 +61,8 @@ for user in users:
     result = authentication_test(api_address, api_port, user['username'], user['password'])
     # printing in a file
     if os.environ.get('LOG') == '1':
-        with open('logs/api_test.log', 'a') as file:
+        os.makedirs('/logs', exist_ok=True)
+        with open('/logs/authentication_test.txt', 'a') as file:
             file.write(result)
 
 

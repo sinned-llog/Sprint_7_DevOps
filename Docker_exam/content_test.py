@@ -37,6 +37,7 @@ def evaluate_sentiment(api_address, api_port, username, password, sentence):
     request done at "/v1/sentiment"
     | username="{username}"
     | password="{password}"
+    | sentence="{sentence}" 
         score = {score_v1}
         sentiment = {sentiment_v1}
     
@@ -46,6 +47,7 @@ def evaluate_sentiment(api_address, api_port, username, password, sentence):
     request done at "/v2/sentiment"
     | username="{username}"
     | password="{password}"
+    | sentence="{sentence}"
         score = {score_v2}
         sentiment = {sentiment_v2}
     '''
@@ -59,13 +61,23 @@ def evaluate_sentiment(api_address, api_port, username, password, sentence):
     print(output.format(
         username=username, 
         password=password, 
+        sentence=sentence,
         score_v1=score_v1,
         sentiment_v1=sentiment_v1,
         score_v2=score_v2,
         sentiment_v2=sentiment_v2
     ))
     
-    return output
+    output_formatted = output.format(
+        username=username, 
+        password=password, 
+        score_v1=score_v1,
+        sentiment_v1=sentiment_v1,
+        score_v2=score_v2,
+        sentiment_v2=sentiment_v2,
+        sentence=sentence,
+    )
+    return output_formatted 
 
 # users to test, senteces to test
 users = [
@@ -82,5 +94,6 @@ for user in users:
         result = evaluate_sentiment(api_address, api_port, user['username'], user['password'], sentence)
         # printing in a file
         if os.environ.get('LOG') == '1':
-            with open('logs/api_test.log', 'a') as file:
+            os.makedirs('/logs', exist_ok=True)
+            with open('/logs/content_test.txt', 'a') as file:
                 file.write(result)

@@ -1,0 +1,43 @@
+
+
+    =============================
+    content test // v1
+    =============================
+    request done at "/v1/sentiment"
+    | username="alice"
+    | password="wonderland"
+    | sentence="life is beautiful" 
+        score = 0.5994
+        sentiment = positive
+    
+    =============================
+    content test // v2
+    =============================
+    request done at "/v2/sentiment"
+    | username="alice"
+    | password="wonderland"
+    | sentence="life is beautiful"
+        score = 0.5994
+        sentiment = positive
+    
+
+    =============================
+    content test // v1
+    =============================
+    request done at "/v1/sentiment"
+    | username="alice"
+    | password="wonderland"
+    | sentence="that sucks" 
+        score = -0.3612
+        sentiment = negative
+    
+    =============================
+    content test // v2
+    =============================
+    request done at "/v2/sentiment"
+    | username="alice"
+    | password="wonderland"
+    | sentence="that sucks"
+        score = -0.3612
+        sentiment = negative
+    

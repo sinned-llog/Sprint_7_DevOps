@@ -25,7 +25,7 @@ def authorization_test(api_address, api_port, username, password, sentence):
     output = '''
 
     =============================
-    Authentication test // v1
+    Authorization test // v1
     =============================
     request done at "/v1/sentiment"
     | username="{username}"
@@ -35,7 +35,7 @@ def authorization_test(api_address, api_port, username, password, sentence):
     ==>  {test_status_v1}
     
     =============================
-    Authentication test // v2
+    Authorization test // v2
     =============================
     request done at "/v2/sentiment"
     | username="{username}"
@@ -61,7 +61,15 @@ def authorization_test(api_address, api_port, username, password, sentence):
         test_status_v2=test_status_v2   
         ))
     
-    return output
+    output_formatted = output.format(
+        username=username, 
+        password=password, 
+        status_code_v1=status_code_v1, 
+        test_status_v1=test_status_v1,
+        status_code_v2=status_code_v2,
+        test_status_v2=test_status_v2   
+        )
+    return output_formatted
 
 users = [
     {'username': 'alice', 'password': 'wonderland', 'sentence': 'life is beautiful'},
@@ -72,5 +80,6 @@ for user in users:
     result = authorization_test(api_address, api_port, user['username'], user['password'], user['sentence'])
     # printing in a file
     if os.environ.get('LOG') == '1':
-        with open('logs/api_test.log', 'a') as file:
+        os.makedirs('/logs', exist_ok=True)
+        with open('/logs/authorization_test.txt', 'a') as file:
             file.write(result)
