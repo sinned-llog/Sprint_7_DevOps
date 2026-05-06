@@ -20,10 +20,47 @@ services:
     networks:
       - my_network
     volumes:
-      - ./Docker_exam/logs:/authentication_test/logs
+      - ./Docker_exam/logs:/logs
     depends_on:
       - api
 
+  authorization_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: authorization_test_container:latest
+    container_name: authorization_test
+    environment:
+      - API_ADDRESS=api
+      - API_PORT=8000
+      - LOG=1
+    networks:
+      - my_network
+    volumes:
+      - ./Docker_exam/logs:/logs
+    depends_on:
+      - api
+      - authentication_test
+
+  content_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: content_test_container:latest
+    container_name: content_test
+    environment:
+      - API_ADDRESS=api
+      - API_PORT=8000
+      - LOG=1
+    networks:
+      - my_network
+    volumes:
+      - ./Docker_exam/logs:/logs
+    depends_on:
+      - api
+      - authentication_test
+      - authorization_test
+      
 networks:
   my_network:
     driver: bridge
