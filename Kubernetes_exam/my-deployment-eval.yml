@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-user-query-deployment
+  labels:
+    app: my-user-query-api
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: my-user-query-api
+  template:
+    metadata:
+      labels:
+       app: my-user-query-api
+    spec:
+      containers:
+      - name: fastapi-app
+        image: myfastapiapp:latest
+        ports:
+        - containerPort: 8000 
+        env:
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef: 
+                name: mysql-password
+                key: MYSQL_PASSWORD
+      - name: mysql-api
+        image: datascientest/mysql-k8s:1.0.0
+        ports:
+        - containerPort: 3306
+        env:
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef: 
+                name: mysql-password
+                key: MYSQL_PASSWORD

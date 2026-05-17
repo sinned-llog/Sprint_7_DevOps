@@ -1,0 +1,8 @@
+##################################
+##upload image to docker hub
+##################################
+#create image
+docker build -t myfastapiapp:latest .
+#load to docker hub
+docker tag myfastapiapp:latest sinned--llog/myfastapiapp:latest
+docker push sinned-llog/myfastapiapp:latest
